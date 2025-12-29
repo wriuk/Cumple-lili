@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #ffe3f0, #8e2de2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Georgia', serif;
+    overflow: hidden;
+}
+
+/* ===== FONDO ELEGANTE ===== */
+.bokeh {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle,
+        rgba(255,255,255,0.35),
+        rgba(255,200,220,0.12),
+        transparent);
+    border-radius: 50%;
+    animation: floatBokeh 22s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatBokeh {
+    from { transform: translateY(120vh); }
+    to { transform: translateY(-40vh); }
+}
+
+/* ===== ESCENA ===== */
+.scene {
+    width: 90vw;
+    max-width: 360px;
+    aspect-ratio: 3 / 2;
+    perspective: 1200px;
+    z-index: 2;
+}
+
+/* ===== SOBRE ===== */
+.envelope {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #fff0f6, #ff5da2);
+    border-radius: 18px;
+    box-shadow: 0 25px 55px rgba(0,0,0,0.35);
+    position: relative;
+    animation: spinOnce 3s ease forwards;
+    cursor: pointer;
+}
+
+@keyframes spinOnce {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+.labels {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    font-size: 15px;
+    color: #6a0136;
+    z-index: 2;
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 55%;
+    background: linear-gradient(135deg, #ff8fab, #f72585);
+    clip-path: polygon(0 0, 100% 0, 50% 85%);
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+/* ===== CARTA ===== */
+.letter {
+    display: none;
+    width: 90vw;
+    max-width: 380px;
+    background: linear-gradient(#fffdf8, #fff7fb);
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+    text-align: center;
+    border: 2px solid #ffb3d9;
+    animation: openLetter 1.5s ease forwards;
+    position: relative;
+}
+
+@keyframes openLetter {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.letter h2 {
+    color: #c9184a;
+    margin-bottom: 18px;
+}
+
+.typed-text {
+    font-size: 16px;
+    color: #4a0033;
+    line-height: 1.7;
+    white-space: pre-line;
+}
+
+/* ===== CORAZÓN ===== */
+#heartContainer {
+    display: none;
+    margin-top: 30px;
+}
+
+.heart-svg {
+    width: 140px;
+    animation: heartBeat 1.4s ease-in-out infinite;
+    transform-origin: center;
+    filter: drop-shadow(0 0 12px rgba(255,215,0,0.8));
+}
+
+@keyframes heartBeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+/* ===== PARTÍCULAS ===== */
+.particle {
+    position: fixed;
+    font-size: 14px;
+    pointer-events: none;
+    animation: rise 3.5s ease forwards;
+}
+
+@keyframes rise {
+    from { transform: translateY(0) scale(1); opacity: 1; }
+    to { transform: translateY(-140px) scale(1.6); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<script>
+for (let i = 0; i < 10; i++) {
+    const b = document.createElement("div");
+    b.className = "bokeh";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.animationDuration = 18 + Math.random() * 12 + "s";
+    b.style.opacity = Math.random() * 0.4 + 0.3;
+    document.body.appendChild(b);
+}
+</script>
+
+<div class="scene" id="scene">
+    <div class="envelope" id="envelope">
+        <div class="labels">
+            <strong>De:</strong> 💌<br>
+            <strong>Para:</strong> Mi hermanita ✨
+        </div>
+        <div class="flap"></div>
+    </div>
+</div>
+
+<div class="letter" id="letter">
+    <h2>🎉 Feliz Cumpleaños 🎉</h2>
+    <div class="typed-text" id="typed"></div>
+
+    <div id="heartContainer">
+        <svg class="heart-svg" viewBox="-5 -5 42 40">
+            <defs>
+                <linearGradient id="gradHeart" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffd166"/>
+                    <stop offset="50%" stop-color="#ff8fab"/>
+                    <stop offset="100%" stop-color="#c9184a"/>
+                </linearGradient>
+            </defs>
+            <path d="M23.6,2
+                     c-3.4,0-6.4,2.1-7.6,5.1
+                     C14.8,4.1,11.8,2,8.4,2
+                     C3.8,2,0,5.8,0,10.4
+                     c0,9.3,16,21.2,16,21.2
+                     s16-11.9,16-21.2
+                     C32,5.8,28.2,2,23.6,2z"
+                  fill="url(#gradHeart)"/>
+        </svg>
+    </div>
+</div>
+
+<script>
+const envelope = document.getElementById("envelope");
+const scene = document.getElementById("scene");
+const letter = document.getElementById("letter");
+const typed = document.getElementById("typed");
+const heart = document.getElementById("heartContainer");
+
+const message =
+`Querida hermanita 💖
+
+Hoy celebro tu vida, tu sonrisa
+y esa luz tan hermosa que llevas dentro. 
+Que este nuevo año te regale
+amor, paz y sueños cumplidos.
+Nunca olvides que siempre
+estaré aquí para ti.
+Gracias por estar siempre para mi. 
+
+Con todo mi corazón,
+Will 💕`;
+
+function typeWriter(text, i = 0) {
+    if (i < text.length) {
+        typed.textContent += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), 45);
+    } else {
+        showHeart();
+    }
+}
+
+function showHeart() {
+    heart.style.display = "block";
+
+    if (navigator.vibrate) {
+        setInterval(() => navigator.vibrate([60, 40, 60]), 1400);
+    }
+
+    startParticles();
+}
+
+function startParticles() {
+    const rect = heart.getBoundingClientRect();
+
+    const interval = setInterval(() => {
+        const p = document.createElement("div");
+        p.className = "particle";
+        p.textContent = Math.random() > 0.5 ? "❤" : "✨";
+        p.style.left = rect.left + rect.width / 2 + (Math.random() * 40 - 20) + "px";
+        p.style.bottom = (window.innerHeight - rect.top) + "px";
+        p.style.color = Math.random() > 0.5 ? "#ffd166" : "#ff5da2";
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 3500);
+    }, 300);
+
+    setTimeout(() => clearInterval(interval), 6000);
+}
+
+envelope.addEventListener("click", () => {
+    const answer = prompt("¿Cuál es tu hermano con el que amas peliar?");
+    if (answer && answer.toLowerCase() === "william") {
+        scene.style.display = "none";
+        letter.style.display = "block";
+        typeWriter(message);
+    } else {
+        alert("❌ Respuesta incorrecta");
+    }
+});
+</script>
+
+</body>
+</html>
